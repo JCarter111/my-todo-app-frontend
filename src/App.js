@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Nav from './components/Nav';
+import AddItem from './components/AddItem';
 
 class App extends Component {
   render() {
@@ -9,6 +10,7 @@ class App extends Component {
        <Nav text="Welcome to my App" />
        <Nav text="Contact Page"/>
        <Nav text="About Us"/>
+       <AddItem />
        <h4>Here is a list of things I need to do</h4>
        <ul>
          <li>
