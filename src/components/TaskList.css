@@ -1,0 +1,21 @@
+/* Show Outstanding Tasks Divison
+/* showOutstandingTasks
+
+/* apply formatting to taskTable id */
+#taskTable {
+    color:darkblue;
+    margin-top: 2%;
+    margin-bottom: 2%;
+} 
+
+/* apply formatting to odd numbered table rows class */
+.oddRow {
+    background: lavender;
+    color: #007bff;
+  }
+/* apply to even numbered table rows */
+.evenRow {
+    background: palegoldenrod;
+    color: #007bff;
+ }
+

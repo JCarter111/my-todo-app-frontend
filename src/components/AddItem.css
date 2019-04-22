@@ -1,0 +1,10 @@
+/* Add Task to List Section */
+/* addTaskToList */
+
+/* format form to input new task */
+/* id addNewTaskForm */
+#addNewTaskForm {
+    /* set top and bottom margins */
+    margin-top: 2%;
+    margin-bottom: 2%;
+}

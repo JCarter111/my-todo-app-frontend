@@ -1,0 +1,26 @@
+/* To Do List Heading Section */
+/* toDoListHeading */
+
+/* apply to image id */
+#imgToDoList {
+    border: 2px solid  darkblue; 
+    width: 100%;
+}
+
+/* use flex columns to format heading */
+/* and picture - side by side layout */
+/* help might be required here */
+/* not really got the hang of flex! */
+#toDoListHeading {
+    margin-top: 2%; 
+    margin-bottom: 2%;
+}
+.column1 {
+    /* align column contents to the left */
+    justify-content: flex-end; 
+}
+.column2 {
+    /* align column contents to the right */
+    justify-content: flex-end;
+}
+

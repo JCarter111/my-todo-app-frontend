@@ -1,15 +1,7 @@
 import React, {Component} from 'react';
 import RowItem from './RowItems';
-
-//{todoListItems.map(function(item){
-//    return <ListItem text ={item} />
-//{this.props.toListItems.map(function(item){
-//    return {item};
-//})};
-//{this.props.fish.map(function(item){
-//    return <p>{item}</p>;
-//})}
-
+// apply TaskList stylesheet to TaskList section
+import './TaskList.css';
 
 // bringing in React Component
 // task list section 
@@ -17,10 +9,12 @@ import RowItem from './RowItems';
 class TaskList extends Component {
     render() {
         return (
-            <div id="taskTable" class = "container">
-            {this.props.listfromParent.map(function(item) {
-                return <RowItem text = {item}/>
-            })}
+            <div id="showOutstandingTasks" class = "standardDiv"> 
+                <div id="taskTable" class = "container">
+                    {this.props.listfromParent.map(function(item) {
+                    return <RowItem text = {item}/>
+                    })}
+                </div>
             </div>
         );
     }

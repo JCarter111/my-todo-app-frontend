@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import ToDoPic from './images/Shopping_List.jpg';
-//<img id="imgToDoList" alt="To Do List" 
-//                        src={ToDoPic}/>
+// apply To Do List Header stylesheet to this section
+import './ToDoListHeader.css';
+
 // bringing in React Component
 // header section 
 // needs image to be added
