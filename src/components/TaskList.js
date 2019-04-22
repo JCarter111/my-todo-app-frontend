@@ -11,8 +11,11 @@ class TaskList extends Component {
         return (
             <div id="showOutstandingTasks" class = "standardDiv"> 
                 <div id="taskTable" class = "container">
-                    {this.props.listfromParent.map(function(item) {
-                    return <RowItem text = {item}/>
+                    {this.props.listfromParent.map(function(item, index) {
+                    return <RowItem 
+                    text = {item}
+                    rowIndex = {index}
+                    />
                     })}
                 </div>
             </div>
