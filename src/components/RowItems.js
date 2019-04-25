@@ -9,22 +9,22 @@ class RowItem extends Component {
     render() {
         if (this.props.rowIndex%2 === 0) {
             return (
-                <div class="row align-items-center oddRow">
-                    <div class="col-8 firstCol">
+                <div className="row align-items-center oddRow">
+                    <div className="col-8 firstCol">
                         {this.props.text}
                     </div>
-                    <div class="col-sm-2 buttonCol">
-                        <input class = "btn btn-outline-primary" 
+                    <div className="col-sm-2 buttonCol">
+                        <input className = "btn btn-outline-primary" 
                                 id="doneTask1" type="submit" value="Done">
                         </input>               
-                        <label class = "sr-only" for="doneTask1">
+                        <label className = "sr-only" htmlFor="doneTask1">
                                 Completed task 1
                         </label>
                     </div>
-                    <div class="col-sm-2 buttonCol">
-                        <input class = "btn btn-outline-primary" id="deleteTask1" type="submit" value="Delete">
+                    <div className="col-sm-2 buttonCol">
+                        <input className = "btn btn-outline-primary" id="deleteTask1" type="submit" value="Delete">
                         </input>                   
-                        <label class = "sr-only" for="deleteTask1">
+                        <label className = "sr-only" htmlFor="deleteTask1">
                             Delete task 1
                         </label>
                     </div>
@@ -32,23 +32,23 @@ class RowItem extends Component {
             );   
         } else {
             return (
-                <div class="row align-items-center evenRow">
-                    <div class="col-8 firstCol">
+                <div className="row align-items-center evenRow">
+                    <div className="col-8 firstCol">
                         {this.props.text}
                     </div>
-                    <div class="col-sm-2 buttonCol">
-                        <input class = "btn btn-outline-primary" 
+                    <div className="col-sm-2 buttonCol">
+                        <input className = "btn btn-outline-primary" 
                             id="doneTask1" type="submit" value="Done">
                         </input>               
-                        <label class = "sr-only" for="doneTask1">
-                            Completed task 1
+                        <label className = "sr-only" htmlFor="doneTask1">
+                            Completed task
                         </label>
                     </div>
-                    <div class="col-sm-2 buttonCol">
-                        <input class = "btn btn-outline-primary" id="deleteTask1" type="submit" value="Delete">
+                    <div className="col-sm-2 buttonCol">
+                        <input className = "btn btn-outline-primary" id="deleteTask1" type="submit" value="Delete">
                         </input>                   
-                        <label class = "sr-only" for="deleteTask1">
-                            Delete task 1
+                        <label className = "sr-only" htmlFor="deleteTask1">
+                            Delete task
                         </label>
                     </div>
                 </div>

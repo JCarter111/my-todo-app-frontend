@@ -6,30 +6,30 @@ import './AddItem.css';
 class AddItem extends Component {
     render () {
         return (
-            <div id="addTaskToList" class = "standardDiv">
-                <div id="addTasks" class = "container">
-                    <div class="row align-items-left">
-                        <div class="col-12 firstCol">
-                            <form class = "form-inline" 
+            <div id="addTaskToList" className = "standardDiv">
+                <div id="addTasks" className = "container">
+                    <div className ="row align-items-left">
+                        <div className ="col-12 firstCol">
+                            <form className = "form-inline" 
                                 id="addNewTaskForm">
-                                <label class="sr-only" 
-                                    for="addNewTaskForm">
+                                <label className ="sr-only" 
+                                    htmlFor="addNewTaskForm">
                                     Add a new task to the list
                                 </label>
-                                <input class = "form-control" 
+                                <input className = "form-control" 
                                     id="textNewTask" 
                                     type="text" name="addTask">
                                 </input>
-                                <label class = "sr-only" 
-                                    for="textNewTask">
+                                <label className = "sr-only" 
+                                    htmlFor="textNewTask">
                                     Input a new task
                                 </label>
                                 <input id="addNewTask" 
-                                    class = "btn btn-primary" 
+                                    className = "btn btn-primary" 
                                     type="submit" value="Add">
                                 </input>
-                                <label class = "sr-only" 
-                                    for="addNewTask">
+                                <label className = "sr-only" 
+                                    htmlFor="addNewTask">
                                     Submit new task
                                 </label>
                             </form>

@@ -5,16 +5,16 @@ import React, {Component} from 'react';
 class NumberTasks extends Component {
     render() {
         return (
-            <div id="countOutstandingTasks" class = "standardDiv">
-                <div id="displayOutstandingTasks" class = "container">
-                    <div class = "row">
-                        <div id="tasksText" class = "col-4">
+            <div id="countOutstandingTasks" className = "standardDiv">
+                <div id="displayOutstandingTasks" className = "container">
+                    <div className = "row">
+                        <div id="tasksText" className = "col-4">
                             Things to do:
                         </div>
-                        <div id = "noOfTasks" class = "col-8">
-                            <span class = "badge-pill badge-primary">{this.props.text}
+                        <div id = "noOfTasks" className = "col-8">
+                            <span className = "badge-pill badge-primary">{this.props.text}
                             </span>
-                            <span class="sr-only">Tasks outstanding</span>
+                            <span className="sr-only">Tasks outstanding</span>
                         </div>
                     </div>
                 </div> 

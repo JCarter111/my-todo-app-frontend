@@ -9,12 +9,12 @@ import './ToDoListHeader.css';
 class ToDoListHeader extends Component {
     render() {
         return (
-            <div id="toDoListHeading" class = "container">
-                <div id="toDoListRow" class = "row">
-                    <div class="col-8 column1"> 
+            <div id="toDoListHeading" className = "container">
+                <div id="toDoListRow" className = "row">
+                    <div className="col-8 column1"> 
                         <h1>{this.props.text}</h1>
                     </div>
-                    <div class="col-4 column2">
+                    <div className="col-4 column2">
                     <img id="imgToDoList" alt="To Do List" 
                       src={ToDoPic}/>
                     </div>
