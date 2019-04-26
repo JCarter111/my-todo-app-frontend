@@ -9,12 +9,13 @@ import './TaskList.css';
 class TaskList extends Component {
     render() {
         return (
-            <div id="showOutstandingTasks" class = "standardDiv"> 
-                <div id="taskTable" class = "container">
+            <div id="showOutstandingTasks" className = "standardDiv"> 
+                <div id="taskTable" className = "container">
                     {this.props.listfromParent.map(function(item, index) {
                     return <RowItem 
                     text = {item}
                     rowIndex = {index}
+                    key = {item + index}  
                     />
                     })}
                 </div>
