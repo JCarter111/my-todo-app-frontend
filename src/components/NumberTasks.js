@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 
 // bringing in React Component
 // section to show number of outstanding tasks
-class NumberTasks extends Component {
+class NumberTasks extends Component {  
     render() {
-        return (
+        return ( 
             <div id="countOutstandingTasks" className = "standardDiv">
                 <div id="displayOutstandingTasks" className = "container">
                     <div className = "row">
@@ -12,7 +12,8 @@ class NumberTasks extends Component {
                             Things to do:
                         </div>
                         <div id = "noOfTasks" className = "col-8">
-                            <span className = "badge-pill badge-primary">{this.props.text}
+                            <span className = "badge-pill badge-primary">
+                                {this.props.countTasks}
                             </span>
                             <span className="sr-only">Tasks outstanding</span>
                         </div>

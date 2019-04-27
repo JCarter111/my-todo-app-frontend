@@ -8,6 +8,19 @@ import React, {Component} from 'react';
 // updated to use dynamic class creation following
 // week 5 homework feedback
 class RowItem extends Component {
+
+    // completed button clicked
+    doneTaskClicked = () => {
+
+    }
+    // delete button clicked
+    deleteTaskClicked = () => {
+     // confirm delete
+     //if (confirm("Are you sure you want to delete this task?")) {
+
+     //}  
+    }
+
     render() {
         const oddEvenClass = this.props.rowIndex % 2 === 0 ? 
             'oddRow' : 'evenRow';
@@ -18,17 +31,22 @@ class RowItem extends Component {
                 </div>
                 <div className="col-sm-2 buttonCol">
                     <input className = "btn btn-outline-primary" 
-                        id="doneTask1" type="submit" value="Done">
+                        id="doneTask" type="submit" 
+                        value="Done"
+                        onClick={this.doneTaskClicked}>
                     </input>               
-                    <label className = "sr-only" htmlFor="doneTask1">
-                        Completed task 1
+                    <label className = "sr-only" htmlFor="doneTask">
+                        Completed task
                     </label>
                 </div>
                 <div className="col-sm-2 buttonCol">
-                    <input className = "btn btn-outline-primary" id="deleteTask1" type="submit" value="Delete">
+                    <input className = "btn btn-outline-primary" 
+                        id="deleteTask" type="submit" 
+                        value="Delete"
+                        onClick={this.deleteTaskClicked}>
                     </input>                   
-                    <label className = "sr-only" htmlFor="deleteTask1">
-                        Delete task 1
+                    <label className = "sr-only" htmlFor="deleteTask">
+                        Delete task
                     </label>
                 </div>
             </div>
