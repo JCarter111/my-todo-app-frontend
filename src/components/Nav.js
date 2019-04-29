@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React from 'react';
 // bringing in React Component
-class Nav extends Component {
+class Nav extends React.Component {
     render() {
         return (
             <nav>

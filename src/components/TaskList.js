@@ -1,21 +1,23 @@
-import React, {Component} from 'react';
+import React from 'react';
 import RowItem from './RowItems';
 // apply TaskList stylesheet to TaskList section
 import './TaskList.css';
 
 // bringing in React Component
 // task list section 
-//return <RowItem text ={item} />
-class TaskList extends Component {
+//Note: use => notation in map function to prevent errors
+class TaskList extends React.Component {
     render() {
         return (
             <div id="showOutstandingTasks" className = "standardDiv"> 
                 <div id="taskTable" className = "container">
-                    {this.props.listfromParent.map(function(object, index) {
+                    {this.props.listfromParent.map((taskObject, index) => {
                     return <RowItem 
-                    text = {object.todoItem}
+                    tskObject = {taskObject}
                     rowIndex = {index}
-                    key = {object.todoItem + index}  
+                    key = {taskObject.todoItem + index}  
+                    deleteTask={this.props.deleteTask}
+                    completedTask = {this.props.completedTask}
                     />
                     })}
                 </div>

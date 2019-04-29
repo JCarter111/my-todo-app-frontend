@@ -17,18 +17,23 @@ class AddItem extends React.Component {
 
     // handle button click
     // Add button has id = addNewTask
-    addNewTaskClicked = () => {
+    addNewTaskClicked = e => {
+        // prevent default submit behaviour of the form 
+        // containing the add Task button
+        e.preventDefault();
         const newTask = this.state.text;
         //validation - only add none blank text
         // strings to the list of tasks
         if (newTask.length > 0){
             // add new task to list
             this.props.addTask(newTask);
-            
             // reset text to blank
             this.setState({
-                text: ''
+               text: ''
             });
+            // set focus back to the input text box - textNewTask
+            // in case further tasks need to be added
+            document.getElementById("textNewTask").focus()
         }
     }
     render () {
@@ -47,15 +52,15 @@ class AddItem extends React.Component {
                                     placeholder = "Type your new task here"
                                     id="textNewTask" 
                                     type="text" name="addTask"
-                                    value = {this.state.text}
-                                    onChange = {this.textNewTaskChanged}>
+                                    value={this.state.text}
+                                    onChange={this.textNewTaskChanged}>
                                 </input>
                                 <label className = "sr-only" 
                                     htmlFor="textNewTask">
                                     Input a new task
                                 </label>
                                 <input id="addNewTask" 
-                                    className = "btn btn-primary" 
+                                  className = "btn btn-primary" 
                                     type="submit" value="Add"
                                     onClick={this.addNewTaskClicked}>
                                 </input>

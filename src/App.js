@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import ToDoListHeader from './components/ToDoListHeader';
 import AddItem from './components/AddItem';
@@ -11,13 +11,13 @@ import TaskList from './components/TaskList';
 // status of the task list
 
 
-class App extends Component {
+class App extends React.Component {
 
   state = {
     todoListItems: [
     {todoItem: "Buy cough sweets", completed: false},
     {todoItem: "Do the washing",completed: false},
-    {todoItem: "Online Shopping Order", completed: false},
+    {todoItem: "Online Shopping Order", completed: true},
     {todoItem: "Buy Birthday present", completed: false},
   ],
   }
@@ -34,7 +34,6 @@ class App extends Component {
     this.setState({
       todoListItems: newTasks
     });
-    alert(this.state.todoListItems.length);
   }
 
   // delete task
@@ -46,9 +45,9 @@ class App extends Component {
     const deleteObject = taskToDeleteObject;
 
     //filter the array copy to remove the existingTask 
-    const newTaskList = todoListCopy.filter(function (object){
+    const newTaskList = todoListCopy.filter((taskObject) => {
       // return all values except the task to be deleted
-      return (object !== deleteObject);
+      return (taskObject !== deleteObject);
     });
   
     // Always use setState to update any part of the state which needs to change
@@ -65,13 +64,13 @@ class App extends Component {
     const completeTaskObject = taskCompletedObject;
 
     //change code here to update completed tasks
-    const newTaskList = todoListCompleted.map(function (object){
+    const newTaskList = todoListCompleted.map((taskObject) => {
       // return all values without modification
       // except update the selected object to completed
-      if (object !== completeTaskObject) {
-          return object
+      if (taskObject !== completeTaskObject) {
+          return taskObject
       } else {
-        return {todoItem: object.todoItem,completed:true }
+        return {todoItem: taskObject.todoItem,completed:true }
       }
     });
     // Always use setState to update any part of the state which needs to change
@@ -91,7 +90,7 @@ class App extends Component {
        <TaskList listfromParent = 
         {this.state.todoListItems }
         deleteTask={this.deleteTask}
-        completeTask = {this.completedTask}/>
+        completedTask = {this.completedTask}/>
        <Footer />
       </div>
      

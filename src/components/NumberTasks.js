@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 // bringing in React Component
 // section to show number of outstanding tasks
-class NumberTasks extends Component {  
+class NumberTasks extends React.Component {  
     render() {
         return ( 
             <div id="countOutstandingTasks" className = "standardDiv">

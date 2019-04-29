@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import ToDoPic from './images/Shopping_List.jpg';
 // apply To Do List Header stylesheet to this section
 import './ToDoListHeader.css';
@@ -6,7 +6,7 @@ import './ToDoListHeader.css';
 // bringing in React Component
 // header section 
 // needs image to be added
-class ToDoListHeader extends Component {
+class ToDoListHeader extends React.Component {
     render() {
         return (
             <div id="toDoListHeading" className = "container">
