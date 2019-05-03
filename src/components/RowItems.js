@@ -11,13 +11,13 @@ class RowItem extends React.Component {
     
     // completed button clicked
     doneTaskClicked = () => {
-        this.props.completedTask(this.props.tskObject)
+        this.props.completedTask(this.props.tskObject.id)
     }
     // delete button clicked
     deleteTaskClicked = () => {
      // ask user to confirm delete is required
      if (window.confirm("Are you sure you want to delete this task?")) {
-        this.props.deleteTask(this.props.tskObject); 
+        this.props.deleteTask(this.props.tskObject.id); 
         
      } else {
         // delete cancelled - take the focus off the delete button
@@ -34,12 +34,14 @@ class RowItem extends React.Component {
                 </div>
                 <div className = "col-md-2 firstCol">
                     {this.props.tskObject.completed ? 
-                        <span className = "badge-pill badge-primary">
+                        <span className = "badge-pill badge-primary" id="completedFlag">
                                 completed
                         </span>
                         : null
                     }
-                <span className="sr-only">Whether task has been completed</span>
+                <span className="sr-only" htmlFor  = "completedFlag">
+                    Whether task has been completed
+                </span>
                 </div>
                 <div className="col-md-2 buttonCol">
                     {this.props.tskObject.completed ? 
@@ -48,13 +50,13 @@ class RowItem extends React.Component {
                             disabled
                             value="Done"
                             onClick={this.doneTaskClicked}>
-                        </input>  :
+                        </input> :
                         <input className = "btn btn-outline-primary" 
-                            id="doneTask" type="submit" 
-                            value="Done"
-                            onClick={this.doneTaskClicked}>
-                        </input> 
-                    }            
+                        id="doneTask" type="submit" 
+                        value="Done"
+                        onClick={this.doneTaskClicked}>
+                        </input>  
+                    }              
                     <label className = "sr-only" htmlFor="doneTask">
                         Completed task
                     </label>

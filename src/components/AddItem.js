@@ -7,6 +7,17 @@ class AddItem extends React.Component {
     state = {
         text: ''
     }
+
+    // create ref to manage focusing on the text input 
+    // box textNewTask when adding a new task
+    constructor(props) {
+        super(props);
+        // create a ref to store the textInput DOM element
+        this.textInput = React.createRef();
+        this.addNewTaskClicked = this.addNewTaskClicked.bind(this);
+      }
+    
+     
     // handle input/removal of text in
     // input box, which has id = textNewTask
     textNewTaskChanged = (event) => {
@@ -33,7 +44,13 @@ class AddItem extends React.Component {
             });
             // set focus back to the input text box - textNewTask
             // in case further tasks need to be added
-            document.getElementById("textNewTask").focus()
+            // Explicitly focus the text input using the raw DOM API
+            // Note: we're accessing "current" to get the DOM node
+            this.textInput.current.focus();
+            // method above is better practice in React than
+            // interacting directly with the document HTML object
+            // as in commented code below
+            //document.getElementById("textNewTask").focus()
         }
     }
     render () {
@@ -53,7 +70,8 @@ class AddItem extends React.Component {
                                     id="textNewTask" 
                                     type="text" name="addTask"
                                     value={this.state.text}
-                                    onChange={this.textNewTaskChanged}>
+                                    onChange={this.textNewTaskChanged}
+                                    ref={this.textInput}>
                                 </input>
                                 <label className = "sr-only" 
                                     htmlFor="textNewTask">
@@ -62,7 +80,8 @@ class AddItem extends React.Component {
                                 <input id="addNewTask" 
                                   className = "btn btn-primary" 
                                     type="submit" value="Add"
-                                    onClick={this.addNewTaskClicked}>
+                                    onClick={this.addNewTaskClicked}
+                                    >
                                 </input>
                                 <label className = "sr-only" 
                                     htmlFor="addNewTask">
