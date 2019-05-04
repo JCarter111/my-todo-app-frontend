@@ -1,4 +1,6 @@
 import React from 'react';
+// apply TaskList stylesheet to TaskList section
+import './TaskList.css';
 // bringing in React Component
 // conditional formatting of each row item
 // depending on whether row is odd numbered row
@@ -27,8 +29,10 @@ class RowItem extends React.Component {
     render() {
         const oddEvenClass = this.props.rowIndex % 2 === 0 ? 
             'oddRow' : 'evenRow';
+        const priorityText = (this.props.tskObject.priority) &&
+            'highlightText';
         return (
-            <div className={`row align-items-center ${oddEvenClass}`}>
+            <div className={`row align-items-center ${oddEvenClass} ${priorityText}`}>
                 <div className="col-6 firstCol">
                     {this.props.tskObject.todoItem}
                 </div>

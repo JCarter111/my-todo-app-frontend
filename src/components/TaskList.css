@@ -19,4 +19,6 @@
     background: palegoldenrod;
     color: #007bff;
  }
-
+ .highlightText {
+   font-weight: bold
+}

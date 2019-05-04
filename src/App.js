@@ -16,19 +16,19 @@ class App extends React.Component {
 
   state = {
     todoListItems: [
-    {todoItem: "Buy cough sweets", completed: false, id:uuid()},
-    {todoItem: "Do the washing",completed: false, id:uuid()},
-    {todoItem: "Online Shopping Order", completed: true, id:uuid()},
-    {todoItem: "Buy Birthday present", completed: false, id:uuid()},
+    {todoItem: "Buy cough sweets", completed: false, priority: false, id:uuid()},
+    {todoItem: "Do the washing",completed: false, priority: false, id:uuid()},
+    {todoItem: "Online Shopping Order", completed: true, priority: false, id:uuid()},
+    {todoItem: "Buy Birthday present", completed: false, priority: false, id:uuid()},
   ],
   }
   
   // add new task 
-  addTask = (newTask) => {
+  addTask = (newTask, taskPriority) => {
     // add the new task (which will be a string) to the task list
     // Make a fresh copy of the tasks array with slice
     const newTasks = this.state.todoListItems.slice();
-    const todoListObject = {todoItem: newTask, completed: false, id:uuid()};
+    const todoListObject = {todoItem: newTask, completed: false, priority: taskPriority, id:uuid()};
     newTasks.push(todoListObject);
 
     // Always use setState to update any part of the state which needs to change
@@ -74,7 +74,7 @@ class App extends React.Component {
       if (taskObject.id !== idCompletedObject) {
           return taskObject
       } else {
-        return {todoItem: taskObject.todoItem,completed:true, id: taskObject.id }
+        return {todoItem: taskObject.todoItem,completed:true, priority: taskObject.priority, id: taskObject.id }
       }
     });
     // Always use setState to update any part of the state which needs to change

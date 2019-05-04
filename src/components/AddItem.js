@@ -5,25 +5,49 @@ import './AddItem.css';
 // with accessibility for screen readers
 class AddItem extends React.Component {
     state = {
-        text: ''
+        text: '',
+        priority: false,
+        selectedOption: "normalPriority",
     }
 
     // create ref to manage focusing on the text input 
-    // box textNewTask when adding a new task
+    // box textNewTask after adding a new task
+    // using guidance on link below
+    // https://reactjs.org/docs/refs-and-the-dom.html
+    // need a constructor to bind the addNewTaskClicked
+    // event handling method to textNewTask
     constructor(props) {
+        // always need super(props)
+        // as first line in a constructor
         super(props);
         // create a ref to store the textInput DOM element
         this.textInput = React.createRef();
+        // constructor to bind add new task button click
+        // to task input form textInput
         this.addNewTaskClicked = this.addNewTaskClicked.bind(this);
+        // constructor to bind high priority task radiobutton
+        // to the task priority state in this component
+        // bind taskFilterChanged event handler to outstanding tasks state
+        this.radioPriorityChanged = this.radioPriorityChanged.bind(this);
       }
     
-     
     // handle input/removal of text in
     // input box, which has id = textNewTask
     textNewTaskChanged = (event) => {
         this.setState({
             text: event.target.value
         })   
+    }
+
+    // handle change of radiobutton selection when new task created
+    // input box, which has id = textNewTask
+    radioPriorityChanged = (event) => {  
+        this.setState({
+            selectedOption: event.target.value
+        }) 
+        this.setState({
+            priority: (event.target.value ==="highPriority")
+        }) 
     }
 
     // handle button click
@@ -33,15 +57,22 @@ class AddItem extends React.Component {
         // containing the add Task button
         e.preventDefault();
         const newTask = this.state.text;
+        const newTaskPriority = this.state.priority;
         //validation - only add none blank text
         // strings to the list of tasks
         if (newTask.length > 0){
             // add new task to list
-            this.props.addTask(newTask);
+            this.props.addTask(newTask, newTaskPriority);
             // reset text to blank
+            // reset default priority of task to normal
+            // set radio buttons to default to normal priority
             this.setState({
-               text: ''
+               text: '',
+               priority: false,
+               selectedOption: "normalPriority"
             });
+            
+
             // set focus back to the input text box - textNewTask
             // in case further tasks need to be added
             // Explicitly focus the text input using the raw DOM API
@@ -58,13 +89,14 @@ class AddItem extends React.Component {
             <div id="addTaskToList" className = "standardDiv">
                 <div id="addTasks" className = "container">
                     <div className ="row align-items-left">
-                        <div className ="col-12 firstCol">
-                            <form className = "form-inline" 
+                        <div className ="col-12  firstCol">
+                            <form className = "form-inline form-check-input" 
                                 id="addNewTaskForm">
                                 <label className ="sr-only" 
                                     htmlFor="addNewTaskForm">
                                     Add a new task to the list
                                 </label>
+                                <div className = "form-group">
                                 <input className = "form-control" 
                                     placeholder = "Type your new task here"
                                     id="textNewTask" 
@@ -77,6 +109,40 @@ class AddItem extends React.Component {
                                     htmlFor="textNewTask">
                                     Input a new task
                                 </label>
+                                </div>
+                                <div className = "form-group">
+                                <input className="form-check-input" 
+                                type="radio" name="exampleRadios" 
+                                id="priorityRadios" value="normalPriority" 
+                                checked = {this.state.selectedOption === "normalPriority"} 
+                                onChange =
+                                {(event) => this.radioPriorityChanged(event)}>
+                                </input>
+                                <label className="form-check-label" htmlFor="priorityRadios">
+                                    Standard Priority
+                                </label>
+                                <label className = "sr-only" 
+                                    htmlFor="priorityRadios">
+                                    Mark task as normal priority - default setting
+                                </label>
+                                </div>
+                                <div className = "form-group">
+                                <input className="form-check-input" type="radio" 
+                                name="exampleRadios" id="priorityRadios" 
+                                checked = {this.state.selectedOption === "highPriority"}
+                                value="highPriority"
+                                onChange =
+                                {(event) => this.radioPriorityChanged(event)}>
+                                </input>
+                                <label className="form-check-label" htmlFor="priorityRadios">
+                                    High Priority
+                                </label>
+                                <label className = "sr-only" 
+                                    htmlFor="priorityRadios">
+                                    Mark task as high priority
+                                </label>
+                                </div>
+                                <div className = "form-group">
                                 <input id="addNewTask" 
                                   className = "btn btn-primary" 
                                     type="submit" value="Add"
@@ -87,6 +153,7 @@ class AddItem extends React.Component {
                                     htmlFor="addNewTask">
                                     Submit new task
                                 </label>
+                                </div>
                             </form>
                         </div>
                     </div>

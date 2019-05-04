@@ -2,27 +2,27 @@ import React from 'react';
 import RowItem from './RowItems';
 // apply TaskList stylesheet to TaskList section
 import './TaskList.css';
-//if (this.outstandingTasksOnly) {
- //   const taskRowArray = this.props.ListfromParent.filter((taskObject) => {
-//        return taskObject.completed = false;
-//    })
-//} else {
-//    const taskRowArray = this.props.ListfromParent;
-//}
+
 
 // bringing in React Component
 // task list section 
 //Note: use => notation in map function to prevent errors
+
 class TaskList extends React.Component {
+    // constructor to bind outstanding tasks only checkbox
+    // to the outstanding tasks only state in this component
     constructor(props) {
+        // super(props) required as first statement in a constructor
         super(props)
+        // create outstanding task state in this component
         this.state = {outstandingTasksOnly: false}
+        // bind taskFilterChanged event handler to outstanding tasks state
         this.tasksFilterChanged = this.tasksFilterChanged.bind(this)
     }
     
     
-    // handle input/removal of text in
-    // input box, which has id = textNewTask
+    // handle selection of outstanding tasks only
+    // when checkbox selected
     tasksFilterChanged = (event) => {
         this.setState({outstandingTasksOnly: !this.state.outstandingTasksOnly})  
         
@@ -31,7 +31,11 @@ class TaskList extends React.Component {
     render() {      
         return (
             <div id="showOutstandingTasks" className = "standardDiv"> 
+                
                 <div id="taskTable" className = "container">
+                    <div id="priorityTaskText" className="highlightText">
+                        High priority tasks are shown in bold
+                    </div>
                     <div className="form-check form-check-inline">
                         <input className="form-check-input" 
                             type="checkbox" id="outstandingTasksOnly" 
@@ -57,6 +61,7 @@ class TaskList extends React.Component {
                     completedTask = {this.props.completedTask}
                     />
                     })}
+                    
                 </div>
             </div>
         );
