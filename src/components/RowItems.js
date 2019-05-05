@@ -31,20 +31,22 @@ class RowItem extends React.Component {
             'oddRow' : 'evenRow';
         const priorityText = (this.props.tskObject.priority) &&
             'highlightText';
+        const completedText = this.props.tskObject.completed && 'strikethroughText';
         return (
-            <div className={`row align-items-center ${oddEvenClass} ${priorityText}`}>
-                <div className="col-6 firstCol">
+            <div className=
+                {`row align-items-center ${oddEvenClass} ${priorityText}`}>
+                <div className= {`col-5 firstCol ${completedText}`}>
                     {this.props.tskObject.todoItem}
                 </div>
-                <div className = "col-md-2 firstCol">
-                    {this.props.tskObject.completed ? 
-                        <span className = "badge-pill badge-primary" id="completedFlag">
-                                completed
+                <div className = "col-md-3 firstCol">
+                    {this.props.tskObject.priority ? 
+                        <span className = "badge-pill badge-danger" id="highPriorityTask">
+                                High priority
                         </span>
                         : null
                     }
-                <span className="sr-only" htmlFor  = "completedFlag">
-                    Whether task has been completed
+                <span className="sr-only" htmlFor  = "highPriorityTask">
+                    Whether task is high priority
                 </span>
                 </div>
                 <div className="col-md-2 buttonCol">

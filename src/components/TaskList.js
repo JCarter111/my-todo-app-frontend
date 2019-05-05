@@ -33,9 +33,6 @@ class TaskList extends React.Component {
             <div id="showOutstandingTasks" className = "standardDiv"> 
                 
                 <div id="taskTable" className = "container">
-                    <div id="priorityTaskText" className="highlightText">
-                        High priority tasks are shown in bold
-                    </div>
                     <div className="form-check form-check-inline">
                         <input className="form-check-input" 
                             type="checkbox" id="outstandingTasksOnly" 

@@ -22,3 +22,6 @@
  .highlightText {
    font-weight: bold
 }
+.strikethroughText {
+  text-decoration: line-through
+}
