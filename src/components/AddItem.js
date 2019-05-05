@@ -89,8 +89,8 @@ class AddItem extends React.Component {
             <div id="addTaskToList" className = "standardDiv">
                 <div id="addTasks" className = "container">
                     <div className ="row align-items-left">
-                        <div className ="col-12  firstCol">
-                            <form className = "form-inline form-check-input" 
+                        <div className ="col-12 firstCol">
+                            <form 
                                 id="addNewTaskForm">
                                 <label className ="sr-only" 
                                     htmlFor="addNewTaskForm">
@@ -110,7 +110,7 @@ class AddItem extends React.Component {
                                     Input a new task
                                 </label>
                                 </div>
-                                <div className = "form-group">
+                                <div className = "form-group form-check-inline" >
                                 <input className="form-check-input" 
                                 type="radio" name="exampleRadios" 
                                 id="priorityRadios" value="normalPriority" 
@@ -126,7 +126,7 @@ class AddItem extends React.Component {
                                     Mark task as normal priority - default setting
                                 </label>
                                 </div>
-                                <div className = "form-group">
+                                <div className = "form-group  form-check-inline">
                                 <input className="form-check-input" type="radio" 
                                 name="exampleRadios" id="priorityRadios" 
                                 checked = {this.state.selectedOption === "highPriority"}
