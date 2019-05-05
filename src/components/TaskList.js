@@ -18,6 +18,10 @@ class TaskList extends React.Component {
         this.state = {outstandingTasksOnly: false}
         // bind taskFilterChanged event handler to outstanding tasks state
         this.tasksFilterChanged = this.tasksFilterChanged.bind(this)
+        // create priority task state in this component
+        this.state = {priorityTasksOnly: false}
+        // bind taskFilterChanged event handler to outstanding tasks state
+        this.priorityFilterChanged = this.priorityFilterChanged.bind(this)
     }
     
     
@@ -25,6 +29,12 @@ class TaskList extends React.Component {
     // when checkbox selected
     tasksFilterChanged = (event) => {
         this.setState({outstandingTasksOnly: !this.state.outstandingTasksOnly})  
+        
+    }
+    // handle selection of outstanding tasks only
+    // when checkbox selected
+    priorityFilterChanged = (event) => {
+        this.setState({priorityTasksOnly: !this.state.priorityTasksOnly})  
         
     }
 
@@ -43,13 +53,31 @@ class TaskList extends React.Component {
                             htmlFor="outstandingTasksOnly">Show outstanding tasks only
                         </label>
                     </div>
+                    <div className="form-check form-check-inline">
+                        <input className="form-check-input" 
+                            type="checkbox" id="priorityTasksOnly" 
+                            value="priority tasks"
+                            onClick = {(event) => this.priorityFilterChanged(event)}>
+                        </input>
+                        <label className="form-check-label" 
+                            htmlFor="priorityTasksOnly">Show high priority tasks only
+                        </label>
+                    </div>
                     {this.props.listfromParent.filter((taskObject) => {
                         if (this.state.outstandingTasksOnly) {
                             return taskObject.completed === false;
                         } else {
                             return taskObject;
                         }
-                    }).map((taskObject, index) => {
+                    })
+                    .filter((taskObject) => {
+                        if (this.state.priorityTasksOnly) {
+                            return taskObject.priority === true;
+                        } else {
+                            return taskObject;
+                        }
+                    })
+                    .map((taskObject, index) => {
                     return <RowItem 
                     tskObject = {taskObject}
                     rowIndex = {index}
