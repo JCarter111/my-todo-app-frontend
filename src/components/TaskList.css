@@ -25,3 +25,7 @@
 .strikethroughText {
   text-decoration: line-through
 }
+
+.overdueDate {
+  color: red
+}

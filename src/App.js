@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 import TaskList from './components/TaskList';
 import uuid from "uuid/v4";
 
-//<TaskList todoListItems = { this.todoListItems }/>
+
 // mimic database list within App to track
 // status of the task list
 
@@ -16,19 +16,20 @@ class App extends React.Component {
 
   state = {
     todoListItems: [
-    {todoItem: "Buy cough sweets", completed: false, priority: false, id:uuid()},
-    {todoItem: "Do the washing",completed: false, priority: false, id:uuid()},
-    {todoItem: "Online Shopping Order", completed: true, priority: false, id:uuid()},
-    {todoItem: "Buy Birthday present", completed: false, priority: false, id:uuid()},
+    {todoItem: "Buy cough sweets", date: "2019-11-19", completed: false, priority: false, id:uuid()},
+    {todoItem: "Do the washing",date: "2019-05-13", completed: false, priority: false, id:uuid()},
+    {todoItem: "Online Shopping Order", date: "2019-03-12", completed: true, priority: false, id:uuid()},
+    {todoItem: "Buy Birthday present", date: "2019-04-21",completed: false, priority: false, id:uuid()},
   ],
   }
   
   // add new task 
-  addTask = (newTask, taskPriority) => {
+  addTask = (newTask, dueDate, taskPriority) => {
     // add the new task (which will be a string) to the task list
     // Make a fresh copy of the tasks array with slice
     const newTasks = this.state.todoListItems.slice();
-    const todoListObject = {todoItem: newTask, completed: false, priority: taskPriority, id:uuid()};
+    const todoListObject = {todoItem: newTask, date: dueDate, 
+      completed: false, priority: taskPriority, id:uuid()};
     newTasks.push(todoListObject);
 
     // Always use setState to update any part of the state which needs to change
@@ -74,7 +75,8 @@ class App extends React.Component {
       if (taskObject.id !== idCompletedObject) {
           return taskObject
       } else {
-        return {todoItem: taskObject.todoItem,completed:true, priority: taskObject.priority, id: taskObject.id }
+        return {todoItem: taskObject.todoItem, date: taskObject.date, 
+          completed:true, priority: taskObject.priority, id: taskObject.id }
       }
     });
     // Always use setState to update any part of the state which needs to change

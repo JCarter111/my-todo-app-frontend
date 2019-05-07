@@ -6,6 +6,7 @@ import './AddItem.css';
 class AddItem extends React.Component {
     state = {
         text: '',
+        date: '',
         priority: false,
         selectedOption: "normalPriority",
     }
@@ -39,6 +40,14 @@ class AddItem extends React.Component {
         })   
     }
 
+    // handle input/removal of text in
+    // input box, which has id = textNewTask
+    textDueDateChanged = (event) => {
+        this.setState({
+            date: event.target.value
+        })   
+    }
+
     // handle change of radiobutton selection when new task created
     // input box, which has id = textNewTask
     radioPriorityChanged = (event) => {  
@@ -57,17 +66,19 @@ class AddItem extends React.Component {
         // containing the add Task button
         e.preventDefault();
         const newTask = this.state.text;
+        const newTaskDueDate = this.state.date;
         const newTaskPriority = this.state.priority;
         //validation - only add none blank text
         // strings to the list of tasks
         if (newTask.length > 0){
             // add new task to list
-            this.props.addTask(newTask, newTaskPriority);
+            this.props.addTask(newTask, newTaskDueDate, newTaskPriority);
             // reset text to blank
             // reset default priority of task to normal
             // set radio buttons to default to normal priority
             this.setState({
                text: '',
+               date: '',
                priority: false,
                selectedOption: "normalPriority"
             });
@@ -108,6 +119,19 @@ class AddItem extends React.Component {
                                 <label className = "sr-only" 
                                     htmlFor="textNewTask">
                                     Input a new task
+                                </label>
+                                </div>
+                                <div className = "form-group">
+                                Due date for task:
+                                <input className = "form-control" 
+                                    id="textTaskDueDate" 
+                                    type="date" name="addDueDate"
+                                    value={this.state.date}
+                                    onChange={this.textDueDateChanged}>
+                                </input>
+                                <label className = "sr-only" 
+                                    htmlFor="textTaskDueDate">
+                                    Due date for task
                                 </label>
                                 </div>
                                 <div className = "form-group form-check-inline" >

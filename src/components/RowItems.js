@@ -1,6 +1,7 @@
 import React from 'react';
 // apply TaskList stylesheet to TaskList section
 import './TaskList.css';
+import Moment from "moment";
 // bringing in React Component
 // conditional formatting of each row item
 // depending on whether row is odd numbered row
@@ -32,11 +33,15 @@ class RowItem extends React.Component {
         const priorityText = (this.props.tskObject.priority) &&
             'highlightText';
         const completedText = this.props.tskObject.completed && 'strikethroughText';
+       
         return (
             <div className=
                 {`row align-items-center ${oddEvenClass} ${priorityText}`}>
-                <div className= {`col-5 firstCol ${completedText}`}>
+                <div className= {`col-3 firstCol ${completedText}`}>
                     {this.props.tskObject.todoItem}
+                </div>
+                <div className= {`col-2 firstCol ${completedText}`}>
+                    {Moment(this.props.tskObject.date).format("DD/MM/YYYY")}
                 </div>
                 <div className = "col-md-3 firstCol">
                     {this.props.tskObject.priority ? 
