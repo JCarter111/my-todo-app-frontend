@@ -6,6 +6,7 @@ import NumberTasks from './components/NumberTasks';
 import Footer from './components/Footer';
 import TaskList from './components/TaskList';
 import uuid from "uuid/v4";
+import moment from "moment"
 
 
 // mimic database list within App to track
@@ -16,10 +17,18 @@ class App extends React.Component {
 
   state = {
     todoListItems: [
-    {todoItem: "Buy cough sweets", date: "2019-11-19", completed: false, priority: false, id:uuid()},
-    {todoItem: "Do the washing",date: "2019-05-13", completed: false, priority: false, id:uuid()},
-    {todoItem: "Online Shopping Order", date: "2019-03-12", completed: true, priority: false, id:uuid()},
-    {todoItem: "Buy Birthday present", date: "2019-04-21",completed: false, priority: false, id:uuid()},
+    {todoItem: "Buy cough sweets", 
+      date: moment("2019-11-19","YYYY-MM-DD"), 
+      completed: false, priority: false, id:uuid()},
+    {todoItem: "Do the washing",
+      date: moment("2019-05-13","YYYY-MM-DD"), 
+      completed: false, priority: false, id:uuid()},
+    {todoItem: "Online Shopping Order", 
+      date: moment("2019-03-12","YYYY-MM-DD"), 
+      completed: true, priority: false, id:uuid()},
+    {todoItem: "Buy Birthday present", 
+      date: moment("2019-04-21","YYYY-MM-DD"),
+      completed: false, priority: false, id:uuid()},
   ],
   }
   

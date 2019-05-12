@@ -1,5 +1,6 @@
 import React from "react";
 import './AddItem.css';
+import moment from "moment"
 // add new task form
 // using Bootstrap inline form class
 // with accessibility for screen readers
@@ -7,6 +8,7 @@ class AddItem extends React.Component {
     state = {
         text: '',
         date: '',
+        dateInvalid: false,
         priority: false,
         selectedOption: "normalPriority",
     }
@@ -23,6 +25,8 @@ class AddItem extends React.Component {
         super(props);
         // create a ref to store the textInput DOM element
         this.textInput = React.createRef();
+        // create a ref to store the dateInput DOM element
+        this.dateInput = React.createRef();
         // constructor to bind add new task button click
         // to task input form textInput
         this.addNewTaskClicked = this.addNewTaskClicked.bind(this);
@@ -40,8 +44,8 @@ class AddItem extends React.Component {
         })   
     }
 
-    // handle input/removal of text in
-    // input box, which has id = textNewTask
+    // handle input/removal of date in
+    // date box, which has id = textDueDateChanged
     textDueDateChanged = (event) => {
         this.setState({
             date: event.target.value
@@ -66,33 +70,42 @@ class AddItem extends React.Component {
         // containing the add Task button
         e.preventDefault();
         const newTask = this.state.text;
-        const newTaskDueDate = this.state.date;
+        const newTaskDueDate = moment(this.state.date);
         const newTaskPriority = this.state.priority;
         //validation - only add none blank text
         // strings to the list of tasks
         if (newTask.length > 0){
-            // add new task to list
-            this.props.addTask(newTask, newTaskDueDate, newTaskPriority);
-            // reset text to blank
-            // reset default priority of task to normal
-            // set radio buttons to default to normal priority
-            this.setState({
-               text: '',
-               date: '',
-               priority: false,
-               selectedOption: "normalPriority"
-            });
-            
-
-            // set focus back to the input text box - textNewTask
-            // in case further tasks need to be added
-            // Explicitly focus the text input using the raw DOM API
-            // Note: we're accessing "current" to get the DOM node
-            this.textInput.current.focus();
-            // method above is better practice in React than
-            // interacting directly with the document HTML object
-            // as in commented code below
-            //document.getElementById("textNewTask").focus()
+            // check that the task date is valid
+            if (newTaskDueDate.isValid()){
+                // add new task to list
+                this.props.addTask(newTask, newTaskDueDate, newTaskPriority);
+                // reset text to blank
+                // reset default priority of task to normal
+                // set radio buttons to default to normal priority
+                this.setState({
+                        text: '',
+                        date: '',
+                        dateInvalid: false,
+                        priority: false,
+                        selectedOption: "normalPriority"
+                });
+                
+                // set focus back to the input text box - textNewTask
+                // in case further tasks need to be added
+                // Explicitly focus the text input using the raw DOM API
+                // Note: we're accessing "current" to get the DOM node
+                this.textInput.current.focus();
+                // method above is better practice in React than
+                // interacting directly with the document HTML object
+                // as in commented code below
+                //document.getElementById("textNewTask").focus()
+            } else {
+                // task date is invalid, need error message on the screen
+                this.setState({
+                        dateInvalid: true
+                })
+                this.dateInput.current.focus();
+            } 
         }
     }
     render () {
@@ -122,12 +135,18 @@ class AddItem extends React.Component {
                                 </label>
                                 </div>
                                 <div className = "form-group">
-                                Due date for task:
+                                    Due date for task:
+                                    <span class = "invalidDate">
+                                        {this.state.dateInvalid &&
+                                        " Please enter a valid date"
+                                        }
+                                    </span>
                                 <input className = "form-control" 
                                     id="textTaskDueDate" 
                                     type="date" name="addDueDate"
                                     value={this.state.date}
-                                    onChange={this.textDueDateChanged}>
+                                    onChange={this.textDueDateChanged}
+                                    ref={this.dateInput}>
                                 </input>
                                 <label className = "sr-only" 
                                     htmlFor="textTaskDueDate">
