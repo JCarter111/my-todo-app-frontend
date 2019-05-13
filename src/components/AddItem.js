@@ -76,7 +76,10 @@ class AddItem extends React.Component {
         // strings to the list of tasks
         if (newTask.length > 0){
             // check that the task date is valid
-            if (newTaskDueDate.isValid() && newTaskDueDate >= moment().subtract(1,"days")){
+            // and check for date being today's date or in the future
+            // note: compare using day, if not exact timestamps are compared
+            // and a date with today's date may be flagged as being in the past
+            if (newTaskDueDate.isValid() && newTaskDueDate.isSameOrAfter(moment(),"day")){
                 // add new task to list
                 this.props.addTask(newTask, newTaskDueDate, newTaskPriority);
                 // reset text to blank
@@ -100,7 +103,7 @@ class AddItem extends React.Component {
                 // as in commented code below
                 //document.getElementById("textNewTask").focus()
             } else {
-                // task date is invalid or is not today or in the future, 
+                // task date is either invalid or is not today or in the future, 
                 // need error message on the screen
                 this.setState({
                         dateInvalid: true

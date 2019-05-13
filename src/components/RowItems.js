@@ -42,11 +42,11 @@ class RowItem extends React.Component {
                     {this.props.tskObject.todoItem}
                 </div>
                 <div className= {`col-2 firstCol ${completedText}`}>
-                {(this.props.tskObject.date) < moment() && (!this.props.tskObject.completed)?
+                {(this.props.tskObject.date).isBefore(moment(),"day") && (!this.props.tskObject.completed)?
                     <span className = "overdueDate">
                         {(this.props.tskObject.date).format("DD/MM/YYYY")} 
                     </span>
-                    :    
+                    :     
                     (this.props.tskObject.date).format("DD/MM/YYYY")
                 }
                 </div>
