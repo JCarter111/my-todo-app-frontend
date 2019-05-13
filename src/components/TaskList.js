@@ -1,7 +1,6 @@
 import React from 'react';
 import RowItem from './RowItems';
-// apply TaskList stylesheet to TaskList section
-import './TaskList.css';
+
 
 
 // bringing in React Component

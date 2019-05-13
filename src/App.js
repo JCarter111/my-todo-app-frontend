@@ -21,13 +21,13 @@ class App extends React.Component {
       date: moment("2019-11-19","YYYY-MM-DD"), 
       completed: false, priority: false, id:uuid()},
     {todoItem: "Do the washing",
-      date: moment("2019-05-13","YYYY-MM-DD"), 
+      date: moment("2019-05-12","YYYY-MM-DD"), 
       completed: false, priority: false, id:uuid()},
     {todoItem: "Online Shopping Order", 
       date: moment("2019-03-12","YYYY-MM-DD"), 
       completed: true, priority: false, id:uuid()},
     {todoItem: "Buy Birthday present", 
-      date: moment("2019-04-21","YYYY-MM-DD"),
+      date: moment("2019-05-13","YYYY-MM-DD"),
       completed: false, priority: false, id:uuid()},
   ],
   }
@@ -37,7 +37,7 @@ class App extends React.Component {
     // add the new task (which will be a string) to the task list
     // Make a fresh copy of the tasks array with slice
     const newTasks = this.state.todoListItems.slice();
-    const todoListObject = {todoItem: newTask, date: dueDate, 
+    const todoListObject = {todoItem: newTask, date: moment(dueDate,"YYYY-MM-DD"), 
       completed: false, priority: taskPriority, id:uuid()};
     newTasks.push(todoListObject);
 

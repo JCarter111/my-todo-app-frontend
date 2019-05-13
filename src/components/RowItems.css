@@ -28,6 +28,5 @@
 
 .overdueDate {
   color: red;
-  font-style: italic;
-  font-weight: normal
+  font-weight: bold
 }

@@ -76,7 +76,7 @@ class AddItem extends React.Component {
         // strings to the list of tasks
         if (newTask.length > 0){
             // check that the task date is valid
-            if (newTaskDueDate.isValid()){
+            if (newTaskDueDate.isValid() && newTaskDueDate >= moment().subtract(1,"days")){
                 // add new task to list
                 this.props.addTask(newTask, newTaskDueDate, newTaskPriority);
                 // reset text to blank
@@ -100,7 +100,8 @@ class AddItem extends React.Component {
                 // as in commented code below
                 //document.getElementById("textNewTask").focus()
             } else {
-                // task date is invalid, need error message on the screen
+                // task date is invalid or is not today or in the future, 
+                // need error message on the screen
                 this.setState({
                         dateInvalid: true
                 })
@@ -136,9 +137,9 @@ class AddItem extends React.Component {
                                 </div>
                                 <div className = "form-group">
                                     Due date for task:
-                                    <span class = "invalidDate">
+                                    <span className = "invalidDate">
                                         {this.state.dateInvalid &&
-                                        " Please enter a valid date"
+                                        " Please enter a valid date, date must be today's date or a future date"
                                         }
                                     </span>
                                 <input className = "form-control" 

@@ -1,7 +1,8 @@
 import React from 'react';
-// apply TaskList stylesheet to TaskList section
-import './TaskList.css';
-import moment from "moment"
+// apply RowItems stylesheet to RowItems section
+import './RowItems.css';
+import moment from "moment";
+
 // bringing in React Component
 // conditional formatting of each row item
 // depending on whether row is odd numbered row
@@ -41,7 +42,13 @@ class RowItem extends React.Component {
                     {this.props.tskObject.todoItem}
                 </div>
                 <div className= {`col-2 firstCol ${completedText}`}>
-                    {(this.props.tskObject.date).format("DD/MM/YYYY")}
+                {(this.props.tskObject.date) < moment() && (!this.props.tskObject.completed)?
+                    <span className = "overdueDate">
+                        {(this.props.tskObject.date).format("DD/MM/YYYY")} 
+                    </span>
+                    :    
+                    (this.props.tskObject.date).format("DD/MM/YYYY")
+                }
                 </div>
                 <div className = "col-md-3 firstCol">
                     {this.props.tskObject.priority ? 
