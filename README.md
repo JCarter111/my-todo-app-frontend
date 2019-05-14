@@ -1,4 +1,54 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# My To Do List Application
+
+This project was created during my attendance of the TechReturners course in 
+Manchester during April - June 2019.
+
+## Application Overview
+
+The web-based application allows a users to setup, view and manage a to-do
+list of tasks. The tasks are stored in a database and displayed each time 
+the application is loaded.
+
+New tasks can be added in the add tasks section, with a task due date and the option 
+to set a task as high priority.
+
+The number of tasks in the to-do list is displayed with a list showing details of each
+task. High priority tasks are marked in the list. Overdue tasks, which have not 
+been completed, have their due dates highlighted in red.
+
+The task list can be filtered e.g. to only show outstanding or high priority tasks
+or a combination of both.
+
+The user can mark tasks as completed and delete tasks from the list.  
+
+## Application Components
+
+App - main component, handling webpage display using React and application events.
+
+ToDoListHeader - displays heading and image on the To Do List webpage
+
+AddItem - allows new tasks to be added to the list of to-do tasks.  The due date of the task 
+must be specified and must be set to either today's date or a future date.  The default priority of each task is standard but the task priority can, optionally, be set to high priority.
+
+NumberTasks - shows the number of tasks currently in the To Do list.  The number is updated each time a new task is added or a task is deleted.
+
+TaskList and RowItem - handle the display of the To Do tasks in a list.  The list
+can be filtered to show outstanding or high priority tasks only or a combination
+of filters can be used.  High priority tasks are flagged in the list and any overdue
+tasks that have not been completed have their due dates highlighted in red. 
+Tasks in the list can be marked as completed or deleted from the task list and 
+task list database.
+
+Footer - footer information for the webpage
+
+mySQL database - details to be added here
+
+## Application Development
+
+The project was created using html, css, Javascript, Bootstrap and using the React framework to develop the front-end application.  The task data is stored in a mySQL database hosted by AWS cloud services.
+
+This project was bootstrapped with 
+[Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
