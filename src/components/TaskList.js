@@ -1,6 +1,6 @@
 import React from 'react';
 import RowItem from './RowItems';
-
+import moment from "moment";
 
 
 // bringing in React Component
@@ -21,6 +21,10 @@ class TaskList extends React.Component {
         this.state = {priorityTasksOnly: false}
         // bind taskFilterChanged event handler to outstanding tasks state
         this.priorityFilterChanged = this.priorityFilterChanged.bind(this)
+        // create overdue task state in this component
+        this.state = {overdueTasksOnly: false}
+        // bind taskFilterChanged event handler to outstanding tasks state
+        this.overdueFilterChanged = this.overdueFilterChanged.bind(this)
     }
     
     
@@ -36,7 +40,12 @@ class TaskList extends React.Component {
         this.setState({priorityTasksOnly: !this.state.priorityTasksOnly})  
         
     }
-
+    // handle selection of overdue tasks only
+    // when checkbox selected
+    overdueFilterChanged = (event) => {
+        this.setState({overdueTasksOnly: !this.state.overdueTasksOnly})  
+        
+    }
     render() {      
         return (
             <div id="showOutstandingTasks" className = "standardDiv"> 
@@ -62,6 +71,16 @@ class TaskList extends React.Component {
                             htmlFor="priorityTasksOnly">Show high priority tasks only
                         </label>
                     </div>
+                    <div className="form-check form-check-inline">
+                        <input className="form-check-input" 
+                            type="checkbox" id="overdueTasksOnly" 
+                            value="overdue tasks"
+                            onClick = {(event) => this.overdueFilterChanged(event)}>
+                        </input>
+                        <label className="form-check-label" 
+                            htmlFor="overdueTasksOnly">Show overdue tasks only
+                        </label>
+                    </div>
                     {this.props.listfromParent.filter((taskObject) => {
                         if (this.state.outstandingTasksOnly) {
                             return taskObject.completed === false;
@@ -72,6 +91,13 @@ class TaskList extends React.Component {
                     .filter((taskObject) => {
                         if (this.state.priorityTasksOnly) {
                             return taskObject.priority === true;
+                        } else {
+                            return taskObject;
+                        }
+                    })
+                    .filter((taskObject) => {
+                        if (this.state.overdueTasksOnly) {
+                            return taskObject.date.isBefore(moment(),"day");
                         } else {
                             return taskObject;
                         }
