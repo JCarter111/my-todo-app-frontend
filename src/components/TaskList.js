@@ -78,7 +78,7 @@ class TaskList extends React.Component {
                             onClick = {(event) => this.overdueFilterChanged(event)}>
                         </input>
                         <label className="form-check-label" 
-                            htmlFor="overdueTasksOnly">Show overdue tasks only
+                            htmlFor="overdueTasksOnly">Show overdue outstanding tasks only
                         </label>
                     </div>
                     {this.props.listfromParent.filter((taskObject) => {
@@ -97,7 +97,8 @@ class TaskList extends React.Component {
                     })
                     .filter((taskObject) => {
                         if (this.state.overdueTasksOnly) {
-                            return taskObject.date.isBefore(moment(),"day");
+                            return (taskObject.date.isBefore(moment(),"day") 
+                            && taskObject.completed === false);
                         } else {
                             return taskObject;
                         }
