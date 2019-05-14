@@ -76,6 +76,7 @@ class TaskList extends React.Component {
                             return taskObject;
                         }
                     })
+                    .sort((a,b) => a.date - b.date)
                     .map((taskObject, index) => {
                     return <RowItem 
                     tskObject = {taskObject}
