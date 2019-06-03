@@ -78,3 +78,8 @@ SELECT * FROM Tasks WHERE userId=2;
 
 /* 10 query to show all Geoff’s completed tasks in the Tasks table */
 SELECT * FROM Tasks WHERE userId=2 AND completed = true;
+
+/* June 2019  - add priority and due_date columns to the Tasks table */
+ALTER TABLE Tasks ADD COLUMN due_date DATE AFTER description;
+
+ALTER TABLE Tasks ADD COLUMN priority BOOLEAN NOT NULL DEFAULT false AFTER due_date;
