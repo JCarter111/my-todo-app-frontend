@@ -39,15 +39,15 @@ class RowItem extends React.Component {
             <div className=
                 {`row align-items-center ${oddEvenClass} ${priorityText}`}>
                 <div className= {`col-3 firstCol ${completedText}`}>
-                    {this.props.tskObject.todoItem}
+                    {this.props.tskObject.description}
                 </div>
                 <div className= {`col-2 firstCol ${completedText}`}>
-                {(this.props.tskObject.date).isBefore(moment(),"day") && (!this.props.tskObject.completed)?
+                {moment(this.props.tskObject.date).isBefore(moment(),"day") && (!this.props.tskObject.completed)?
                     <span className = "overdueDate">
-                        {(this.props.tskObject.date).format("DD/MM/YYYY")} 
+                        {moment(this.props.tskObject.date).format("DD/MM/YYYY")} 
                     </span>
                     :     
-                    (this.props.tskObject.date).format("DD/MM/YYYY")
+                    moment(this.props.tskObject.date).format("DD/MM/YYYY")
                 }
                 </div>
                 <div className = "col-md-3 firstCol">

@@ -97,7 +97,7 @@ class TaskList extends React.Component {
                     })
                     .filter((taskObject) => {
                         if (this.state.overdueTasksOnly) {
-                            return (taskObject.date.isBefore(moment(),"day") 
+                            return (moment(taskObject.dueDate).isBefore(moment(),"day") 
                             && taskObject.completed === false);
                         } else {
                             return taskObject;
@@ -108,7 +108,7 @@ class TaskList extends React.Component {
                     return <RowItem 
                     tskObject = {taskObject}
                     rowIndex = {index}
-                    key = {taskObject.todoItem + index}  
+                    key = {taskObject.description + index}  
                     deleteTask={this.props.deleteTask}
                     completedTask = {this.props.completedTask}
                     />

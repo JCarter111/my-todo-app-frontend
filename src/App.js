@@ -6,7 +6,8 @@ import NumberTasks from './components/NumberTasks';
 import Footer from './components/Footer';
 import TaskList from './components/TaskList';
 import uuid from "uuid/v4";
-import moment from "moment"
+import moment from "moment";
+import axios from "axios";
 
 
 // mimic database list within App to track
@@ -17,21 +18,21 @@ class App extends React.Component {
 
   state = {
     todoListItems: [
-    {todoItem: "Buy cough sweets", 
-      date: moment("2019-11-19","YYYY-MM-DD"), 
-      completed: false, priority: false, id:uuid()},
-    {todoItem: "Do the washing",
-      date: moment("2019-05-12","YYYY-MM-DD"), 
-      completed: false, priority: false, id:uuid()},
-    {todoItem: "Online Shopping Order", 
-      date: moment("2019-03-12","YYYY-MM-DD"), 
-      completed: true, priority: false, id:uuid()},
-    {todoItem: "Buy Birthday present", 
-      date: moment("2019-05-13","YYYY-MM-DD"),
-      completed: false, priority: false, id:uuid()},
+    
   ],
   }
   
+  componentWillMount() {
+  axios.get('https://2xo2bg7ux6.execute-api.eu-west-2.amazonaws.com/dev/tasks')
+  .then(response => {
+    console.log(response.data.tasks);
+    this.setState({todoListItems: response.data.tasks});
+  })
+  .catch(error => {
+    console.log(error);
+  });
+   
+  }
   // add new task 
   addTask = (newTask, dueDate, taskPriority) => {
     // add the new task (which will be a string) to the task list
