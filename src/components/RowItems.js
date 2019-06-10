@@ -15,18 +15,19 @@ class RowItem extends React.Component {
     
     // completed button clicked
     doneTaskClicked = () => {
-        this.props.completedTask(this.props.tskObject.id)
+        this.props.completedTask(this.props.tskObject.taskId)
     }
     // delete button clicked
     deleteTaskClicked = () => {
      // ask user to confirm delete is required
      if (window.confirm("Are you sure you want to delete this task?")) {
-        this.props.deleteTask(this.props.tskObject.id); 
-        
-     } else {
-        // delete cancelled - take the focus off the delete button
-        document.getElementById("deleteTask").blur();
+        this.props.deleteTask(this.props.tskObject.taskId); 
+        // remove focus from delete button
+        document.activeElement.blur();
      }
+    // remove focus from the delete button
+    //document.getElementById("deleteTask").blur();
+     document.activeElement.blur();
     }
     render() {
         const oddEvenClass = this.props.rowIndex % 2 === 0 ? 
@@ -42,12 +43,12 @@ class RowItem extends React.Component {
                     {this.props.tskObject.description}
                 </div>
                 <div className= {`col-2 firstCol ${completedText}`}>
-                {moment(this.props.tskObject.date).isBefore(moment(),"day") && (!this.props.tskObject.completed)?
+                {moment(this.props.tskObject.dueDate).isBefore(moment(),"day") && (!this.props.tskObject.completed)?
                     <span className = "overdueDate">
-                        {moment(this.props.tskObject.date).format("DD/MM/YYYY")} 
+                        {moment(this.props.tskObject.dueDate).format("DD/MM/YYYY")} 
                     </span>
                     :     
-                    moment(this.props.tskObject.date).format("DD/MM/YYYY")
+                    moment(this.props.tskObject.dueDate).format("DD/MM/YYYY")
                 }
                 </div>
                 <div className = "col-md-3 firstCol">

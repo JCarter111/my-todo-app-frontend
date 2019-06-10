@@ -7,7 +7,7 @@ class Footer extends React.Component {
     render() {
         return (
             <footer id = "toDoListFooter">
-                &copy; Jackie - last update May 2019
+                &copy; Jackie - last update June 2019
             </footer> 
         );
     }

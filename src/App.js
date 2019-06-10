@@ -38,8 +38,8 @@ class App extends React.Component {
     // add the new task (which will be a string) to the task list
     // Make a fresh copy of the tasks array with slice
     const newTasks = this.state.todoListItems.slice();
-    const todoListObject = {todoItem: newTask, date: moment(dueDate,"YYYY-MM-DD"), 
-      completed: false, priority: taskPriority, id:uuid()};
+    const todoListObject = {description: newTask, dueDate: moment(dueDate,"YYYY-MM-DD"), 
+      completed: false, priority: taskPriority, taskId:uuid()};
     newTasks.push(todoListObject);
 
     // Always use setState to update any part of the state which needs to change
@@ -61,7 +61,7 @@ class App extends React.Component {
       // return all values except the task to be deleted
       // use the unique id of the task to locate the task in 
       // the array of objects
-      return (taskObject.id !== idTaskToDelete);
+      return (taskObject.taskId !== idTaskToDelete);
     });
   
     // Always use setState to update any part of the state which needs to change
@@ -82,11 +82,11 @@ class App extends React.Component {
       // except update the selected object to completed
       // use unique id of the task object to locate the object
       // in the array of tasks
-      if (taskObject.id !== idCompletedObject) {
+      if (taskObject.taskId !== idCompletedObject) {
           return taskObject
       } else {
-        return {todoItem: taskObject.todoItem, date: taskObject.date, 
-          completed:true, priority: taskObject.priority, id: taskObject.id }
+        return {description: taskObject.description, dueDate: taskObject.dueDate, 
+          completed:true, priority: taskObject.priority, taskId: taskObject.taskId }
       }
     });
     // Always use setState to update any part of the state which needs to change

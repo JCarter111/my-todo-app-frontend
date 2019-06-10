@@ -23,6 +23,7 @@ class TaskList extends React.Component {
         this.priorityFilterChanged = this.priorityFilterChanged.bind(this)
         // create overdue task state in this component
         this.state = {overdueTasksOnly: false}
+        console.log("overdue filter initial state ",this.state.overdueTasksOnly);
         // bind taskFilterChanged event handler to outstanding tasks state
         this.overdueFilterChanged = this.overdueFilterChanged.bind(this)
     }
@@ -103,7 +104,10 @@ class TaskList extends React.Component {
                             return taskObject;
                         }
                     })
-                    .sort((a,b) => a.date - b.date)
+                    // used moment to ensure database date is interpreted
+                    // in correct date format for sort
+                    .sort((a,b) => moment(a.dueDate) - moment(b.dueDate))
+                    //.sort((a,b) => a.dueDate - b.dueDate)
                     .map((taskObject, index) => {
                     return <RowItem 
                     tskObject = {taskObject}
