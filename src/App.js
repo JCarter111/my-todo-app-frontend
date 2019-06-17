@@ -52,22 +52,26 @@ class App extends React.Component {
   // delete task
   deleteTask = (idTaskToDelete) => {
     // delete an existing task from the task list
-
+    axios.delete(`https://2xo2bg7ux6.execute-api.eu-west-2.amazonaws.com/dev/tasks/${idTaskToDelete}`)
     // Note: Do not need a fresh copy of the todoListItems array
     // here because filter makes its own copy of the array
+    .then((res) => {
+      //filter the array copy to remove the existingTask 
+      const newTaskList = this.state.todoListItems.filter((taskObject) => {
+        // return all values except the task to be deleted
+        // use the unique id of the task to locate the task in 
+        // the array of objects
+        return (taskObject.taskId !== idTaskToDelete);
+      });
     
-    //filter the array copy to remove the existingTask 
-    const newTaskList = this.state.todoListItems.filter((taskObject) => {
-      // return all values except the task to be deleted
-      // use the unique id of the task to locate the task in 
-      // the array of objects
-      return (taskObject.taskId !== idTaskToDelete);
-    });
-  
-    // Always use setState to update any part of the state which needs to change
-    this.setState({
-      todoListItems: newTaskList
-    });
+      // Always use setState to update any part of the state which needs to change
+      this.setState({
+        todoListItems: newTaskList
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
   // mark task completed
   completedTask = (idCompletedObject) => {

@@ -83,3 +83,6 @@ SELECT * FROM Tasks WHERE userId=2 AND completed = true;
 ALTER TABLE Tasks ADD COLUMN due_date DATE AFTER description;
 
 ALTER TABLE Tasks ADD COLUMN priority BOOLEAN NOT NULL DEFAULT false AFTER due_date;
+
+/* show table design */
+DESCRIBE Tasks;
