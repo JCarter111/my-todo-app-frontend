@@ -33,20 +33,35 @@ class App extends React.Component {
   });
    
   }
+
   // add new task 
   addTask = (newTask, dueDate, taskPriority) => {
     // add the new task (which will be a string) to the task list
     // Make a fresh copy of the tasks array with slice
     const newTasks = this.state.todoListItems.slice();
+    // original todoListObject with unique id assigned in the code
+    //const todoListObject = {description: newTask, dueDate: moment(dueDate,"YYYY-MM-DD"), 
+    //  completed: false, priority: taskPriority, taskId:uuid()};
+    // new task object Note: unique ID now assigned when the data is inserted into the 
+    // database
     const todoListObject = {description: newTask, dueDate: moment(dueDate,"YYYY-MM-DD"), 
-      completed: false, priority: taskPriority, taskId:uuid()};
-    newTasks.push(todoListObject);
+    priority: taskPriority, completed: false };
 
-    // Always use setState to update any part of the state which needs to change
-    this.setState({
-      todoListItems: newTasks
-    });
-    console.log(this.state.todoListItems);
+    axios.post('https://2xo2bg7ux6.execute-api.eu-west-2.amazonaws.com/dev/tasks', {
+      task: todoListObject
+    })
+      .then(result => {
+        const taskId = result.data.taskId;
+        todoListObject.taskId = taskId;
+        newTasks.push(todoListObject);
+        // Always use setState to update any part of the state which needs to change
+        this.setState({
+            todoListItems: newTasks
+          });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   // delete task
@@ -75,12 +90,32 @@ class App extends React.Component {
   }
   // mark task completed
   completedTask = (idCompletedObject) => {
-    // delete an existing task from the task list
 
+    // mark at task in the list as completed
+    axios.put(`https://2xo2bg7ux6.execute-api.eu-west-2.amazonaws.com/dev/tasks/${idCompletedObject}`)
+      
     // Note: do not need a copy of the array because
     // map makes its own copy
 
     //change code here to update completed tasks
+    .then(() => {
+      // With a map, get each item
+      // if the id is equal to the item's id, we change the completed property
+      // set state
+      const updatedTasks = this.state.tasks.map(item => {
+        if (item.taskId === idCompletedObject) {
+          item.completed = true;
+        }
+        return item;
+      });
+  
+      this.setState({
+        tasks: updatedTasks
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    })
     const newTaskList = this.state.todoListItems.map((taskObject) => {
       // return all values without modification
       // except update the selected object to completed
