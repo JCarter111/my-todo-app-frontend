@@ -43,9 +43,9 @@ class App extends React.Component {
     //const todoListObject = {description: newTask, dueDate: moment(dueDate,"YYYY-MM-DD"), 
     //  completed: false, priority: taskPriority, taskId:uuid()};
     // new task object Note: unique ID now assigned when the data is inserted into the 
-    // database
+    // database, need userId to be 1 or 2
     const todoListObject = {description: newTask, dueDate: moment(dueDate,"YYYY-MM-DD"), 
-    priority: taskPriority, completed: false };
+    priority: taskPriority, completed: false, userId: 1 };
 
     axios.post('https://2xo2bg7ux6.execute-api.eu-west-2.amazonaws.com/dev/tasks', {
       task: todoListObject
@@ -102,36 +102,27 @@ class App extends React.Component {
       // With a map, get each item
       // if the id is equal to the item's id, we change the completed property
       // set state
-      const updatedTasks = this.state.tasks.map(item => {
-        if (item.taskId === idCompletedObject) {
-          item.completed = true;
+      const newTaskList = this.state.todoListItems.map((taskObject) => {
+        // return all values without modification
+        // except update the selected object to completed
+        // use unique id of the task object to locate the object
+        // in the array of tasks
+        if (taskObject.taskId !== idCompletedObject) {
+            return taskObject
+        } else {
+          return {description: taskObject.description, dueDate: taskObject.dueDate, 
+            completed:true, priority: taskObject.priority, taskId: taskObject.taskId }
         }
-        return item;
       });
-  
+      // Always use setState to update any part of the state which needs to change
       this.setState({
-        tasks: updatedTasks
+        todoListItems: newTaskList
       });
     })
     .catch(err => {
       console.log(err);
     })
-    const newTaskList = this.state.todoListItems.map((taskObject) => {
-      // return all values without modification
-      // except update the selected object to completed
-      // use unique id of the task object to locate the object
-      // in the array of tasks
-      if (taskObject.taskId !== idCompletedObject) {
-          return taskObject
-      } else {
-        return {description: taskObject.description, dueDate: taskObject.dueDate, 
-          completed:true, priority: taskObject.priority, taskId: taskObject.taskId }
-      }
-    });
-    // Always use setState to update any part of the state which needs to change
-    this.setState({
-      todoListItems: newTaskList
-    });
+    
   }
 
   
