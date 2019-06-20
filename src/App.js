@@ -44,12 +44,12 @@ class App extends React.Component {
     //  completed: false, priority: taskPriority, taskId:uuid()};
     // new task object Note: unique ID now assigned when the data is inserted into the 
     // database, need userId to be 1 or 2
-    const todoListObject = {description: newTask, dueDate: moment(dueDate,"YYYY-MM-DD"), 
-    priority: taskPriority, completed: false, userId: 1 };
-
-    axios.post('https://2xo2bg7ux6.execute-api.eu-west-2.amazonaws.com/dev/tasks', {
-      task: todoListObject
-    })
+    //fails here object not defined
+    const todoListObject = 
+    {description: newTask, dueDate: moment(dueDate,"YYYY-MM-DD"),priority: taskPriority, completed: false, userId:1};
+    console.log ("to do list " + todoListObject.description);
+    axios.post('https://2xo2bg7ux6.execute-api.eu-west-2.amazonaws.com/dev/tasks', 
+      todoListObject)
       .then(result => {
         const taskId = result.data.taskId;
         todoListObject.taskId = taskId;
