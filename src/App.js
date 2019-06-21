@@ -5,7 +5,6 @@ import AddItem from './components/AddItem';
 import NumberTasks from './components/NumberTasks';
 import Footer from './components/Footer';
 import TaskList from './components/TaskList';
-import uuid from "uuid/v4";
 import moment from "moment";
 import axios from "axios";
 
