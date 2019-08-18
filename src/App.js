@@ -16,20 +16,18 @@ import axios from "axios";
 class App extends React.Component {
 
   state = {
-    todoListItems: [
-    
-  ],
+    todoListItems: [],
   }
   
   componentWillMount() {
-  axios.get('https://2xo2bg7ux6.execute-api.eu-west-2.amazonaws.com/dev/tasks')
-  .then(response => {
-    console.log(response.data.tasks);
-    this.setState({todoListItems: response.data.tasks});
-  })
-  .catch(error => {
-    console.log(error);
-  });
+    axios.get('https://2xo2bg7ux6.execute-api.eu-west-2.amazonaws.com/dev/tasks')
+      .then(response => {
+        console.log("***", response.data.tasks);
+        this.setState({todoListItems: response.data.tasks});
+      })
+      .catch(error => {
+        console.log(error);
+      });
    
   }
 

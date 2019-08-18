@@ -1,6 +1,7 @@
 import React from 'react';
 import RowItem from './RowItems';
 import moment from "moment";
+import taskFilter from '../helpers/taskFilter';
 
 
 // bringing in React Component
@@ -8,22 +9,20 @@ import moment from "moment";
 //Note: use => notation in map function to prevent errors
 
 class TaskList extends React.Component {
+    state = {
+        outstandingTasksOnly: false,
+        priorityTasksOnly: false,
+        overdueTasksOnly: false
+    }
     // constructor to bind outstanding tasks only checkbox
     // to the outstanding tasks only state in this component
     constructor(props) {
         // super(props) required as first statement in a constructor
         super(props)
-        // create outstanding task state in this component
-        this.state = {outstandingTasksOnly: false}
         // bind taskFilterChanged event handler to outstanding tasks state
         this.tasksFilterChanged = this.tasksFilterChanged.bind(this)
-        // create priority task state in this component
-        this.state = {priorityTasksOnly: false}
         // bind taskFilterChanged event handler to outstanding tasks state
         this.priorityFilterChanged = this.priorityFilterChanged.bind(this)
-        // create overdue task state in this component
-        this.state = {overdueTasksOnly: false}
-        console.log("overdue filter initial state ",this.state.overdueTasksOnly);
         // bind taskFilterChanged event handler to outstanding tasks state
         this.overdueFilterChanged = this.overdueFilterChanged.bind(this)
     }
@@ -47,7 +46,12 @@ class TaskList extends React.Component {
         this.setState({overdueTasksOnly: !this.state.overdueTasksOnly})  
         
     }
-    render() {      
+    render() { 
+        //const filteredTasks = taskFilter(this.state, this.props.listfromParent, new Date().toISOString()) 
+        // add to line 85 // {filteredTasks.sort().map()} - use filteredTasks function in separate
+        // file instead of having filter code below  
+        // needed 0 for false, 1 for true in filter logic now that database is being used
+        // due to database data types  
         return (
             <div id="showOutstandingTasks" className = "standardDiv"> 
                 
@@ -82,16 +86,17 @@ class TaskList extends React.Component {
                             htmlFor="overdueTasksOnly">Show overdue outstanding tasks only
                         </label>
                     </div>
+                    
                     {this.props.listfromParent.filter((taskObject) => {
                         if (this.state.outstandingTasksOnly) {
-                            return taskObject.completed === false;
+                            return taskObject.completed === 0;
                         } else {
                             return taskObject;
                         }
                     })
                     .filter((taskObject) => {
                         if (this.state.priorityTasksOnly) {
-                            return taskObject.priority === true;
+                            return taskObject.priority === 1;
                         } else {
                             return taskObject;
                         }
@@ -99,7 +104,7 @@ class TaskList extends React.Component {
                     .filter((taskObject) => {
                         if (this.state.overdueTasksOnly) {
                             return (moment(taskObject.dueDate).isBefore(moment(),"day") 
-                            && taskObject.completed === false);
+                            && taskObject.completed === 0);
                         } else {
                             return taskObject;
                         }
